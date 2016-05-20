@@ -1,0 +1,24 @@
+.popover{
+	max-width: 100%; /* Max Width of the popover (depending on the container!) */
+}
+.table tbody tr > td {
+	width: 50px;
+    height: 117px;
+}
+
+.table tbody tr > td.gray {
+  	background-color: #EEE !important;
+}
+
+.table tbody tr > td.today {
+  	background-color: #EEE !important;
+}
+
+.table>tbody>tr.gray>td {
+    background-color: #EEE !important;
+    color: #777;
+}
+
+.title {
+	text-align: center;
+}
