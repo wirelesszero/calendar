@@ -8,21 +8,21 @@ class Model {
 
     private $mysqli;
 
-	private $connection;
+    private $connection;
 
- 	public function __construct()
+    public function __construct()
     {
-		$host = HOST;
-		$db_name = DB;
-		$username = USERNAME;
-		$password = PASSWORD;
+        $host = HOST;
+        $db_name = DB;
+        $username = USERNAME;
+        $password = PASSWORD;
 
-    	try {
-		    $this->connection = new PDO("mysql:host={$host};dbname={$db_name}", $username, $password);
+        try {
+            $this->connection = new PDO("mysql:host={$host};dbname={$db_name}", $username, $password);
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		} catch(PDOException $exception){
-		    echo "Connection error: " . $exception->getMessage();
-		}
+        } catch(PDOException $exception){
+            echo "Connection error: " . $exception->getMessage();
+        }
     }
 
     /**
@@ -85,7 +85,7 @@ class Model {
      */
     public function create()
     {
-    	$fields = implode(', ', array_keys($this->properties));
+        $fields = implode(', ', array_keys($this->properties));
 
         $values = '';
         foreach ($this->properties as $key => $value) {
@@ -93,10 +93,10 @@ class Model {
         }
         $values = substr($values, 0, -1);
 
-    	if ($this->properties) {
-    		$stmt = $this->connection->prepare("INSERT INTO " .  static::$table . "($fields) VALUES( $values )");
-			$stmt->execute($this->properties);
-    	}
+        if ($this->properties) {
+            $stmt = $this->connection->prepare("INSERT INTO " .  static::$table . "($fields) VALUES( $values )");
+            $stmt->execute($this->properties);
+        }
         unset($stmt);
 
         return $this->connection->lastInsertId();
@@ -110,7 +110,7 @@ class Model {
      */
     public function __set($name, $value)
     {
-    	$this->properties[$name] = $value;
+        $this->properties[$name] = $value;
     }
 
     /**
@@ -120,9 +120,9 @@ class Model {
      */
     public function __get($name)
     {
-		if (!key_exists($name, $this->properties)) {
-			throw new PDOException("Undefined property $name", 1);
-		}
-		return $this->properties[$name];
+        if (!key_exists($name, $this->properties)) {
+            throw new PDOException("Undefined property $name", 1);
+        }
+        return $this->properties[$name];
     }
 }
